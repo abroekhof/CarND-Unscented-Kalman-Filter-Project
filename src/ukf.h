@@ -28,6 +28,15 @@ public:
 
   ///* state covariance matrix
   MatrixXd P_;
+  
+  ///* Laser noise
+  MatrixXd R_Laser_;
+  
+  ///* State to Laser matrix
+  MatrixXd H_Laser_;
+  
+  ///* Radar noise
+  MatrixXd R_Radar_;
 
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
@@ -102,6 +111,12 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateLidar(MeasurementPackage meas_package);
+  
+  /**
+   * Converts from state space to radar space.
+   * @param {VectorXd} state
+   */
+  VectorXd State2Radar(VectorXd radar_meas);
 
   /**
    * Updates the state and the state covariance matrix using a radar measurement
